@@ -14,11 +14,13 @@ jobs:
       contents: write
 
     steps:
-      - run: echo Haskell > temp
+      - run: |
+          mkdir binaries
+          echo Haskell > binaries/temp
 
       - name: Create GitHub prerelease
         uses: softprops/action-gh-release@v2
         with:
           tag_name: cabal-head
           prerelease: true
-          files: temp
+          files: binaries/temp
