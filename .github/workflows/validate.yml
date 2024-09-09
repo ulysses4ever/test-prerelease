@@ -1,0 +1,24 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  prerelease-head:
+    name: Create a GitHub prerelease
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - run: echo Haskell > temp
+
+      - name: Create GitHub prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: cabal-head
+          prerelease: true
+          files: temp
